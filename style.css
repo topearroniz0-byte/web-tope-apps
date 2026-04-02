@@ -81,9 +81,18 @@ body {
     color: #000;
     font-weight: 700;
     text-transform: uppercase;
-    padding: 15px;
+    padding: 12px 25px; /* Ajustado */
     cursor: pointer;
     text-align: center;
+    display: inline-block; /* Importante para enlaces <a> */
+    text-decoration: none; /* Quitar subrayado */
+    margin-top: 15px;
+    transition: 0.2s;
+}
+
+.action-btn-gold:hover {
+    background: #e6bc32;
+    transform: translateY(-2px);
 }
 
 .main-footer {

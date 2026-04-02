@@ -3,24 +3,24 @@
         "name": "Luz & Orden",
         "url": "https://topearroniz0-byte.github.io/Luz-Orden/",
         "description": "Gestión de hogar y limpieza optimizada con Soraya AI.",
-        "category": "android"
+        "category": "multi"
     },
     {
         "name": "Gestor de Gastos",
         "url": "https://topearroniz0-byte.github.io/mis-gastos/",
         "description": "Gestor de presupuesto y gastos mensuales con interfaz intuitiva.",
-        "category": "android"
+        "category": "multi"
     },
     {
         "name": "Gestor de Empresas",
         "url": "https://topearroniz0-byte.github.io/gestor-empresa/",
         "description": "Control inteligente de stock y beneficios.Tu negocio, simplificado.",
-        "category": "android"
+        "category": "multi"
     },
     {
         "name": "pronto subire mas cosas",
         "url": "",
         "description": "Estamos trabajando en nuevas apps y scripts para GtaV RP.",
-        "category": "todos"
+        "category": "multi"
     }
 ]
