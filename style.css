@@ -1,0 +1,129 @@
+:root {
+    --primary-gold: #c5a028;
+    --bg-main: #050505;
+    --bg-card: #0f0f0f;
+    --bg-input: #151515;
+    --text-high: #ffffff;
+    --text-mid: #999999;
+    --border-soft: #222222;
+    --accent-red: #8b0000;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-high);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.main-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 30px;
+    margin-bottom: 50px;
+}
+
+.logo-area h1 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.logo-area h1 span { color: var(--primary-gold); }
+
+.auth-btn {
+    background: transparent;
+    border: 1px solid var(--border-soft);
+    color: var(--text-mid);
+    padding: 8px 15px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.admin-console {
+    background: var(--bg-card);
+    border: 1px solid var(--primary-gold);
+    padding: 30px;
+    margin-bottom: 50px;
+}
+
+.repo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    padding: 35px;
+    transition: 0.3s;
+}
+
+.card:hover { border-color: var(--primary-gold); }
+
+.action-btn-gold {
+    background: var(--primary-gold);
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 15px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.main-footer {
+    text-align: center;
+    margin-top: 100px;
+    padding: 40px 0;
+    border-top: 1px solid var(--border-soft);
+    color: #444;
+}
+/* ... (Mantén tu CSS anterior y añade esto) ... */
+
+.repo-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid var(--border-soft);
+    color: var(--text-mid);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    border-color: var(--primary-gold);
+    color: var(--primary-gold);
+}
+
+.category-tag {
+    font-size: 0.6rem;
+    color: var(--primary-gold);
+    border: 1px solid var(--primary-gold);
+    padding: 2px 6px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
