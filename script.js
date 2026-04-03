@@ -1,93 +1,78 @@
 const ADMIN_ACCESS_KEY = "tope123";
 let allApps = [];
+let currentFilter = 'all';
 
-// FUNCIÓN PARA ENVIAR LA DESCARGA A GOOGLE
 function trackDownload(appName) {
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-        'event': 'download_click', // Este es el nombre que usaremos en la web de Google
-        'app_name': appName
-    });
-    console.log("Rastreo enviado: " + appName);
+    window.dataLayer.push({ 'event': 'download_click', 'app_name': appName });
 }
 
 async function cargarRepositorio() {
     try {
         const response = await fetch('apps.json');
+        if (!response.ok) throw new Error('Error JSON');
         allApps = await response.json();
-        renderApps('all');
+        renderApps();
         setupFilters();
+        setupSearch();
     } catch (error) {
-        document.getElementById('appContainer').innerHTML = "ERROR DE CARGA";
+        document.getElementById('appContainer').innerHTML = "<p style='color:red; text-align:center;'>Error de conexión.</p>";
     }
 }
 
-// ... (Tus funciones de rastreo y carga inicial se mantienen igual) ...
-
-function renderApps(filter) {
+function renderApps(searchTerm = "") {
     const container = document.getElementById('appContainer');
     container.innerHTML = "";
 
-    const appsFiltradas = allApps.filter(app => {
-        if (filter === 'all') return true;
-        if (app.category === 'multi') return true;
-        return app.category === filter; 
+    const filtered = allApps.filter(app => {
+        const matchesFilter = (currentFilter === 'all' || app.category === currentFilter);
+        const matchesSearch = app.name.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesFilter && matchesSearch;
     });
-    
-    // ESTE BLOQUE ESTABA FUERA, DEBE IR AQUÍ DENTRO:
-    appsFiltradas.forEach(app => {
+
+    filtered.forEach(app => {
         const card = document.createElement('article');
         card.className = "card";
+        const isComingSoon = (app.url === "" || app.url === "#");
         
-        let actionHTML = "";
-        if (app.url === "" || app.url === "#") {
-            actionHTML = `<p style="color: var(--primary-gold); font-weight: bold; margin-top: 20px; font-size: 0.8rem; text-transform: uppercase;">🚀 Próximamente</p>`;
-        } else {
-            actionHTML = `
-                <div style="margin-top: 20px;">
-                    <a href="${app.url}" target="_blank" class="action-btn-gold" onclick="trackDownload('${app.name}')">
-                        DESCARGAR
-                    </a>
-                </div>`;
-        }
+        const actionHTML = isComingSoon 
+            ? `<div style="text-align:center; color: var(--accent-cyan); font-size: 0.8rem; border: 1px dashed var(--accent-blue); padding: 10px; border-radius: 10px;">PRÓXIMAMENTE</div>`
+            : `<a href="${app.url}" target="_blank" class="action-btn-gold" onclick="trackDownload('${app.name}')">DESCARGAR</a>`;
 
         card.innerHTML = `
-            <div class="card-info">
-                <span class="category-tag">${app.category.toUpperCase()}</span>
+            <div>
+                <span class="category-tag">${app.category}</span>
                 <h3>${app.name}</h3>
                 <p>${app.description}</p>
-                ${actionHTML}
-            </div>`;
+            </div>
+            ${actionHTML}
+        `;
         container.appendChild(card);
     });
-} // Aquí cierra correctamente la función renderApps
-
-// ... (El resto del código de filtros y login se mantiene igual) ...
+}
 
 function setupFilters() {
-    const buttons = document.querySelectorAll('.filter-btn');
-    buttons.forEach(btn => {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            buttons.forEach(b => b.classList.remove('active'));
+            document.querySelector('.filter-btn.active').classList.remove('active');
             btn.classList.add('active');
-            renderApps(btn.getAttribute('data-category'));
+            currentFilter = btn.getAttribute('data-category');
+            renderApps(document.getElementById('appSearch').value);
         });
     });
 }
 
-// ADMIN LOGIN
-const btnAdmin = document.getElementById('btnAdminLogin');
-if (btnAdmin) {
-    btnAdmin.addEventListener('click', () => {
-        if (prompt("ACCESS:") === ADMIN_ACCESS_KEY) {
-            document.getElementById('adminPanel').style.display = 'block';
-            document.getElementById('adminContent').innerHTML = `
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <p>ADMIN MODE ONLINE</p>
-                    <button onclick="location.reload()" class="auth-btn">CERRAR</button>
-                </div>`;
-        }
+function setupSearch() {
+    document.getElementById('appSearch').addEventListener('input', (e) => {
+        renderApps(e.target.value);
     });
 }
 
-window.onload = cargarRepositorio;
+document.getElementById('btnAdminLogin').addEventListener('click', () => {
+    if (prompt("ACCESS KEY:") === ADMIN_ACCESS_KEY) {
+        document.getElementById('adminPanel').style.display = 'block';
+        document.getElementById('adminContent').innerHTML = "<p>Admin Mode Activo</p>";
+    }
+});
+
+document.addEventListener('DOMContentLoaded', cargarRepositorio);

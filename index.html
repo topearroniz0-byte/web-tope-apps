@@ -10,17 +10,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tope Systems | Repository</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ML62SHGP"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
     <div class="main-wrapper">
         <header class="main-header">
-            <div class="logo-area">
-                <h1>TOPE <span>SYSTEMS</span></h1>
-                <p>Advanced Software & Script Repository</p>
-            </div>
             <button id="btnAdminLogin" class="auth-btn">Admin Auth</button>
+            
+            <div class="header-center-block">
+                <img src="logo_tope_systems.png" alt="Tope Systems Logo" class="logo-image">
+                <div class="title-text-group">
+                    <h1>TOPE <span>SYSTEMS</span></h1>
+                    <p>Advanced Software & Script Repository</p>
+                </div>
+            </div>
         </header>
 
         <section id="adminPanel" class="admin-console" style="display: none;">
@@ -28,18 +34,24 @@
         </section>
 
         <main class="content-wrapper">
-            <nav class="repo-filters">
-    <button class="filter-btn active" data-category="all">Todas</button> 
-    
-    <button class="filter-btn" data-category="pc">PC / Windows</button>
-    <button class="filter-btn" data-category="android">Android / APK</button>
-    <button class="filter-btn" data-category="multi">Multiplataforma</button>
-</nav>
-            <div id="appContainer" class="repo-grid"></div>
+            <div class="repo-controls">
+                <nav class="repo-filters">
+                    <button class="filter-btn active" data-category="all">Todos</button> 
+                    <button class="filter-btn" data-category="pc">Windows</button>
+                    <button class="filter-btn" data-category="android">Android</button>
+                    <button class="filter-btn" data-category="multi">Multi</button>
+                </nav>
+                <div class="search-box">
+                    <input type="text" id="appSearch" placeholder="Buscar software...">
+                </div>
+            </div>
+            
+            <div id="appContainer" class="repo-grid">
+                </div>
         </main>
 
         <footer class="main-footer">
-            <p>&copy; 2026 Tope Systems. All rights reserved.</p>
+            <p>&copy; 2026 Tope Systems. Producido con tecnología de vanguardia.</p>
         </footer>
     </div>
 
