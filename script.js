@@ -10,13 +10,13 @@ function trackDownload(appName) {
 async function cargarRepositorio() {
     try {
         const response = await fetch('apps.json');
-        if (!response.ok) throw new Error('Error JSON');
+        if (!response.ok) throw new Error('Error al cargar apps.json');
         allApps = await response.json();
         renderApps();
         setupFilters();
         setupSearch();
     } catch (error) {
-        document.getElementById('appContainer').innerHTML = "<p style='color:red; text-align:center;'>Error de conexión.</p>";
+        document.getElementById('appContainer').innerHTML = "<p style='color:#ff4444; text-align:center;'>Error conectando con el servidor de aplicaciones.</p>";
     }
 }
 
@@ -71,7 +71,7 @@ function setupSearch() {
 document.getElementById('btnAdminLogin').addEventListener('click', () => {
     if (prompt("ACCESS KEY:") === ADMIN_ACCESS_KEY) {
         document.getElementById('adminPanel').style.display = 'block';
-        document.getElementById('adminContent').innerHTML = "<p>Admin Mode Activo</p>";
+        document.getElementById('adminContent').innerHTML = "<p>🛠 Modo Administrador Activado</p>";
     }
 });
 
